@@ -1,0 +1,22 @@
+server:
+  port: 9092
+
+spring:
+  application:
+    name: cloud-movie-consumer
+
+eureka:
+  client:
+    region:
+    service-url:
+      defaultZone: http://root:root@localhost:9090/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+management:
+  security:
+    enabled: false
+
+
+
