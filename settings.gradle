@@ -1,3 +1,4 @@
 rootProject.name = 'spring-cloud'
 include 'cloud-user-provid'
 include 'eureka-discovery'
+include 'cloud-movie-consumer'
