@@ -1,0 +1,40 @@
+server:
+  port: 9091
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dengjk?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  application:
+    #项目名字
+    name: cloud-user-provid
+
+#向eureka注册服务
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:9090/eureka/
+  instance:
+    #开启虚拟主机ip地址->就不在显示计算机名字,或者localhost
+    prefer-ip-address: true
+    #指定显示规则
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    hostname: cloud-user-provid-hostname
+    #服务中心删除此服务实例的等待时间(秒为单位),时间间隔为最后一次服务中心接受到的心跳时间
+    lease-expiration-duration-in-seconds: 90
+    #该实例给服务中心发送心跳的间隔时间，用于表明该服务实例可用
+    lease-renewal-interval-in-seconds: 30
+
+#actuator信息
+management:
+  security:
+    enabled: false
+
+
+

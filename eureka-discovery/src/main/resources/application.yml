@@ -1,0 +1,29 @@
+server:
+  port: 9090
+
+#eureka配置
+eureka:
+  instance:
+    hostname: discovery
+  client:
+    #主要用于集群  是否向服务注册中心注册自己
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://root:root@localhost:${server.port}/eureka/
+  server:
+    #关闭自我保护模式,有服务down掉,就在服务列表中删除
+    enable-self-preservation: false
+    #检测到服务down掉后,清理无效节点的时间间隔
+    eviction-interval-timer-in-ms: 4000
+
+spring:
+  application:
+    #应用名字
+    name: eureka-discovery
+security:
+  basic:
+    enabled: true
+  user:
+   name: root
+   password: root
