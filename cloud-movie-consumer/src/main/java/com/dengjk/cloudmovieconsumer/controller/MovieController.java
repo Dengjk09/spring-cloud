@@ -4,6 +4,7 @@ import com.dengjk.cloudmovieconsumer.entity.UserEntity;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +17,11 @@ import org.springframework.web.client.RestTemplate;
 public class MovieController {
 
     @Autowired
-    @Qualifier("restTemplateForReRequest")
     private RestTemplate restTemplate;
 
     @GetMapping("getUser/{id}")
     public UserEntity getUserById(@PathVariable(value = "id") Integer id) {
-        UserEntity userEntity = restTemplate.getForObject("http://127.0.0.1:9091/user/getUser/" + id, UserEntity.class);
+        UserEntity userEntity = restTemplate.getForObject("http://cloud-user-provid/user/getUser/" + id, UserEntity.class);
         return userEntity;
     }
 }

@@ -18,5 +18,9 @@ management:
   security:
     enabled: false
 
+#配置ribbon针对默认服务的负载算法
+#cloud-user-provid:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 
 
