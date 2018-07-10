@@ -4,9 +4,10 @@ server:
 spring:
   application:
     name: cloud-movie-consumer
-
 eureka:
   client:
+    healthcheck:
+       enabled: true
     region:
     service-url:
       defaultZone: http://root:root@localhost:9090/eureka/
