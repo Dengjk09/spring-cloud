@@ -1,0 +1,40 @@
+server:
+  port: 9093
+
+spring:
+  application:
+    name: cloud-movie-hystrix
+eureka:
+  client:
+    healthcheck:
+       enabled: true
+    region:
+    service-url:
+      defaultZone: http://root:root@localhost:9090/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+management:
+  security:
+    enabled: false
+
+#设置feign的请求超时时间
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+#设置feign开启gzip解压
+feign:
+  compression:
+    request:
+      enabled: true
+      min-request-size: 2048
+    response:
+      enabled: true
+#配置ribbon针对默认服务的负载算法
+#cloud-user-provid:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+
