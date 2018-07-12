@@ -1,4 +1,4 @@
-package com.dengjk.cloudmovieconsumer.config;
+package com.dengjk.cloudmoviehystrix.config;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;

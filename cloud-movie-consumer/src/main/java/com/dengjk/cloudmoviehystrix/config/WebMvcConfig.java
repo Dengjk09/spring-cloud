@@ -1,4 +1,4 @@
-package com.dengjk.cloudmovieconsumer.config;
+package com.dengjk.cloudmoviehystrix.config;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;

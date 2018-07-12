@@ -1,10 +1,7 @@
-package com.dengjk.cloudmovieconsumer.service;
+package com.dengjk.cloudmoviehystrix.service;
 
-import com.dengjk.cloudmovieconsumer.entity.UserEntity;
-import feign.Param;
-import feign.RequestLine;
+import com.dengjk.cloudmoviehystrix.entity.UserEntity;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.cloud.netflix.feign.FeignClientProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 

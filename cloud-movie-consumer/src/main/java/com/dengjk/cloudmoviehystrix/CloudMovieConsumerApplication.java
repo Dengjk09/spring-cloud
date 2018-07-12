@@ -1,4 +1,4 @@
-package com.dengjk.cloudmovieconsumer;
+package com.dengjk.cloudmoviehystrix;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -6,13 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 
 @SpringBootApplication
 @EnableEurekaClient
