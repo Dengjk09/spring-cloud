@@ -1,6 +1,6 @@
-package com.dengjk.cloudmovieconsumer.service.impl;
+package com.dengjk.cloudmoviehystrix.service.impl;
 
-import com.dengjk.cloudmovieconsumer.entity.UserEntity;
+import com.dengjk.cloudmoviehystrix.entity.UserEntity;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  *
  **/
 @Service
-public class UserFeignReqImpl {
+public class UserHystrixImpl {
 
     @Autowired
     private    RestTemplate restTemplate;
@@ -24,7 +24,7 @@ public class UserFeignReqImpl {
     @HystrixCommand(fallbackMethod = "getUserByHystrixRallback",commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")})
     public UserEntity getUserByHystrix(Integer id ){
-       return new RestTemplate().getForObject("http://cloud-user-provid/user/getUser/" + id, UserEntity.class);
+       return restTemplate.getForObject("http://cloud-user-provid/user/getUser/" + id, UserEntity.class);
     }
 
 
@@ -34,5 +34,4 @@ public class UserFeignReqImpl {
         userEntity.setMsg("进入了fallBack方法");
         return userEntity;
     }
-
 }

@@ -1,4 +1,4 @@
-package com.dengjk.cloudmovieconsumer.config;
+package com.dengjk.cloudmoviehystrix.config;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
@@ -30,7 +30,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         FastJsonHttpMessageConverter oFastConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig oFastJsonConfig = new FastJsonConfig();
         oFastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
-        oFastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat, SerializerFeature.WriteNullListAsEmpty,SerializerFeature.WriteMapNullValue);
+        oFastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat, SerializerFeature.WriteNullListAsEmpty);
         oFastConverter.setFastJsonConfig(oFastJsonConfig);
         List<MediaType> oFastMediaTypeList = new ArrayList<>();
         oFastMediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);

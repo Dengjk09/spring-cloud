@@ -32,7 +32,11 @@ feign:
       min-request-size: 2048
     response:
       enabled: true
-
+  #Feign在默认情况下使用的是JDK原生的URLConnection发送HTTP请求，没有连接池
+  httpclient:
+    enabled: false
+  hystrix:
+    enabled: true
 #设置hystrix默认的请求超时时间,默认是1秒  也可以设置单独某个方法的超时间
            #hystrix.command.serverMethod.execution.isolation.thread.timeoutInMilliseconds=3000
 hystrix:
