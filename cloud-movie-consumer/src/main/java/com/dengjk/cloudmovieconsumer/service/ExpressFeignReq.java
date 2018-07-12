@@ -1,4 +1,4 @@
-package com.dengjk.cloudmoviehystrix.service;
+package com.dengjk.cloudmovieconsumer.service;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.cloud.netflix.feign.FeignClientProperties;

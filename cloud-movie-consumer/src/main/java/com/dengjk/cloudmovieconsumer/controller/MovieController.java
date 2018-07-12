@@ -1,9 +1,8 @@
-package com.dengjk.cloudmoviehystrix.controller;
+package com.dengjk.cloudmovieconsumer.controller;
 
-import com.dengjk.cloudmoviehystrix.entity.UserEntity;
-import com.dengjk.cloudmoviehystrix.service.ExpressFeignReq;
-import com.dengjk.cloudmoviehystrix.service.UserFeignReq;
-import com.dengjk.cloudmoviehystrix.service.impl.UserFeignReqImpl;
+import com.dengjk.cloudmovieconsumer.entity.UserEntity;
+import com.dengjk.cloudmovieconsumer.service.ExpressFeignReq;
+import com.dengjk.cloudmovieconsumer.service.UserFeignReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,6 @@ public class MovieController {
     @Autowired
     private ExpressFeignReq expressFeignReq;
 
-    @Autowired
-    private UserFeignReqImpl userFeignReqImpl;
-
     @GetMapping("getUser/{id}")
     @ApiOperation("使用ribbon负载调用获取用户信息接口")
     public UserEntity getUserById(@PathVariable(value = "id") Integer id) {
@@ -37,9 +33,14 @@ public class MovieController {
         return userEntity;
     }
 
-    @GetMapping("getUserById2Hystrix/{id}")
-    @ApiOperation("测试Hystrix进入熔断模式")
-    public UserEntity getUserById2Hystrix(@PathVariable(value = "id") Integer id) {
-        return userFeignReqImpl.getUserByHystrix(id);
+    @GetMapping("/getUserByFeign/{id}")
+    @ApiOperation("使用申明式feign获取用户信息")
+    public UserEntity getUserByIdUFeign(@PathVariable(value = "id") Integer id){
+       return userFeignReq.getUserById(id);
+    }
+
+    @GetMapping("/getExpressInfo")
+    public String getExpressInfo(){
+        return expressFeignReq.getExpress();
     }
 }

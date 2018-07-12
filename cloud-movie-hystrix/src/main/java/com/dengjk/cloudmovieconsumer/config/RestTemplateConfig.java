@@ -1,4 +1,4 @@
-package com.dengjk.cloudmoviehystrix.config;
+package com.dengjk.cloudmovieconsumer.config;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;

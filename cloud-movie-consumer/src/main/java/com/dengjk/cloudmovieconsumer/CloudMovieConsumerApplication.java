@@ -1,4 +1,4 @@
-package com.dengjk.cloudmoviehystrix;
+package com.dengjk.cloudmovieconsumer;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

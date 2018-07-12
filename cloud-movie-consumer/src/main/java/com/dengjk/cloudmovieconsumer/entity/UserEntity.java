@@ -1,4 +1,4 @@
-package com.dengjk.cloudmoviehystrix.entity;
+package com.dengjk.cloudmovieconsumer.entity;
 
 import java.io.Serializable;
 

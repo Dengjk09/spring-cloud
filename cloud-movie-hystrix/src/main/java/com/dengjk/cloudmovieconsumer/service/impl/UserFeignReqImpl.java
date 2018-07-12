@@ -1,6 +1,6 @@
-package com.dengjk.cloudmoviehystrix.service.impl;
+package com.dengjk.cloudmovieconsumer.service.impl;
 
-import com.dengjk.cloudmoviehystrix.entity.UserEntity;
+import com.dengjk.cloudmovieconsumer.entity.UserEntity;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
