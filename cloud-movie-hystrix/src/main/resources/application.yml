@@ -32,6 +32,19 @@ feign:
       min-request-size: 2048
     response:
       enabled: true
+
+#设置hystrix默认的请求超时时间,默认是1秒  也可以设置单独某个方法的超时间
+           #hystrix.command.serverMethod.execution.isolation.thread.timeoutInMilliseconds=3000
+hystrix:
+  command:
+    getUserByHystrix:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+
+
+
 #配置ribbon针对默认服务的负载算法
 #cloud-user-provid:
 #  ribbon:

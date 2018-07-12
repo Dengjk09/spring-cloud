@@ -30,7 +30,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         FastJsonHttpMessageConverter oFastConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig oFastJsonConfig = new FastJsonConfig();
         oFastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
-        oFastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat, SerializerFeature.WriteNullListAsEmpty);
+        oFastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat, SerializerFeature.WriteNullListAsEmpty,SerializerFeature.WriteMapNullValue);
         oFastConverter.setFastJsonConfig(oFastJsonConfig);
         List<MediaType> oFastMediaTypeList = new ArrayList<>();
         oFastMediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);

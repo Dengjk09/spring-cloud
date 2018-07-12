@@ -38,6 +38,11 @@ dependencies {
 
 	/**申明式httpclientfeign的依赖*/
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-feign', version: '1.4.5.RELEASE'
+	compile group: 'com.netflix.feign', name: 'feign-httpclient', version: '8.18.0'
+
+	/**熔断机制hystrix*/
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix', version: '1.4.5.RELEASE'
+
 
 }
 

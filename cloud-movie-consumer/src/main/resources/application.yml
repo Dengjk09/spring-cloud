@@ -32,6 +32,10 @@ feign:
       min-request-size: 2048
     response:
       enabled: true
+
+  #Feign在默认情况下使用的是JDK原生的URLConnection发送HTTP请求，没有连接池
+  httpclient:
+    enabled: true
 #配置ribbon针对默认服务的负载算法
 #cloud-user-provid:
 #  ribbon:
