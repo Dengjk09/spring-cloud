@@ -1,0 +1,25 @@
+server:
+  port: 9094
+
+#eureka配置
+eureka:
+  instance:
+    hostname: api-gateway
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:9090/eureka/
+
+spring:
+  application:
+    #应用名字
+    name: cloud-api-gateway
+
+#定义zuul的路由规则 ignored是忽略的服务,只有
+zuul:
+  ignored-services: '*'
+    #指定路由规则
+    routes:
+      #user这个是路由的名字,可以随便指定,只要不重复就可以了
+      user: /user/**

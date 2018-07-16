@@ -3,3 +3,5 @@ include 'cloud-user-provid'
 include 'eureka-discovery'
 include 'cloud-movie-consumer'
 include 'cloud-movie-hystrix'
+include 'cloud-api-gateway'
+
