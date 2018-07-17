@@ -10,7 +10,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  * @desc  spring-cloud   api统一网关
  *
  *	把所有的微服务给代理起来,提供一个入口 类似于nginx的的反向代理
- *
+ *  所有使用了zuul微服务,默认都会用hystrix进行包裹
  **/
 @SpringBootApplication
 @EnableZuulProxy

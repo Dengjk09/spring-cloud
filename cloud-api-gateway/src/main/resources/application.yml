@@ -1,6 +1,5 @@
 server:
   port: 9094
-
 #eureka配置
 eureka:
   instance:
@@ -10,16 +9,49 @@ eureka:
   client:
     service-url:
       defaultZone: http://root:root@localhost:9090/eureka/
-
 spring:
   application:
     #应用名字
     name: cloud-api-gateway
+security:
+  basic:
+    enabled: true
+  user:
+   name: root
+   password: root
 
-#定义zuul的路由规则 ignored是忽略的服务,只有
+#定义zuul的路由规则 ，zuul默认会代理eruka下面所有的服务
+#zuul:
+#  routes:
+#    #代理cloud-user-provid下面的所有服务 ,所有eruka下面的服务都可以通过serive名字作为路径前缀来访问,
+#    #可以通过user路径来访问cloud-user-provid这个服务->http://192.168.234.1:9094/user/user/getUser/1
+#     cloud-user-provid: /user/**
+#  #同时也可以忽略某个服务
+#  ignored-services: cloud-movie-consumer
+#  #同时也可以忽略某些路径
+#  ignored-patterns: /admin/**
+
+#可以通过路径  localhost:9094/routes  查看当前zuul代理的微服务,已经被映射的路径,
+
+#同时也是可以通过path来指定更加细腻度的访问，指定每个一个服务的路径，把cloud-user-provid这个服务通过path开头的路径来访问
 zuul:
-  ignored-services: '*'
-    #指定路由规则
-    routes:
-      #user这个是路由的名字,可以随便指定,只要不重复就可以了
-      user: /user/**
+  #配置访问微服务的前缀类似于context.path   如果配置了请求所有的微服务前面必须加上这个路径
+  #prefix: user
+  routes:
+    #abc是随意指定的一个路由规则名字,只要不重复可以随意指定
+    abc:
+      path: /user-path/**
+      serviceId: cloud-user-provid
+      #同时也可以指定他的物理路径,这些简单的URL路由不会被执行为HystrixCommand，也不能使用Ribbon对多个URL进行负载平衡
+      #url: http://192.168.234.1:9094
+    efg:
+      #访问的路径前缀
+      path: /movie-consumer/**
+      serviceId: cloud-movie-consumer
+      #strip-prefix: false
+      # sensitiveHeaders就是指定在api网关中那些cookie和header 可以带到后端微服务中
+      sensitiveHeaders: Cookie,Set-Cookie,Authorization
+#指定zuul使用的http请求工具: zuul使用的默认HTTP客户端现在由Apache HTTP Client支持，而不是不推荐使用的Ribbon RestClient。
+#要分别使用RestClient或使用okhttp3.OkHttpClient集合ribbon.restclient.enabled=true或ribbon.okhttp.enabled=true。
+
+
