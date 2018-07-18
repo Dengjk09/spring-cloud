@@ -1,0 +1,42 @@
+server:
+  port: 9095
+
+#spring:
+#  thymeleaf:
+#    #设置响应类型accountInfo.html
+#    content-type: text/html
+#      #所在路径
+#    prefix: classpath:/static/
+#    #文件后缀名
+#    suffix: .html
+#    #关闭缓存
+#    cache: false
+#    #html5引擎
+#  profiles:
+#    active: db
+
+spring:
+  profiles:
+    active: db
+
+#thymeleaf start
+  thymeleaf:
+    mode: LEGACYHTML5
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  mvc:
+    static-path-pattern: /**
+  #静态文件扫描的地址
+  resources:
+    static-locations: classpath:/templates/,classpath:/templates/admin
+#thymeleaf end
+
+
+
+
+
+
+

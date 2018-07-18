@@ -51,7 +51,20 @@ zuul:
       #strip-prefix: false
       # sensitiveHeaders就是指定在api网关中那些cookie和header 可以带到后端微服务中
       sensitiveHeaders: Cookie,Set-Cookie,Authorization
+  host:
+    #网关系统总连接个数
+    max-total-connections: 300
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
 #指定zuul使用的http请求工具: zuul使用的默认HTTP客户端现在由Apache HTTP Client支持，而不是不推荐使用的Ribbon RestClient。
 #要分别使用RestClient或使用okhttp3.OkHttpClient集合ribbon.restclient.enabled=true或ribbon.okhttp.enabled=true。
 
+#设置hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
 

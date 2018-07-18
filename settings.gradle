@@ -4,4 +4,6 @@ include 'eureka-discovery'
 include 'cloud-movie-consumer'
 include 'cloud-movie-hystrix'
 include 'cloud-api-gateway'
+include 'daily-study'
+
 
