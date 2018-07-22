@@ -1,8 +1,15 @@
 server:
   port: 9096
 
+#使用git作为spring-config的动态配置组件 可以使用/{application}-{profile}  来读取git上面的配置信息  有以下几种获取的方式
+#application}/{profile}[/{label}]
+#{application}-{profile}.yml
+#{label}/{application}-{profile}.yml
+#{application}-{profile}.properties
+#{label}/{application}-{profile}.properties
 spring:
   cloud:
     config:
       server:
-        git: https://gitee.com/dengjiakang/config-server.git
+        git:
+          uri: https://gitee.com/dengjiakang/config-server.git

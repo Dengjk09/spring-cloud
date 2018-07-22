@@ -21,7 +21,11 @@ dependencies {
 	/**actuator*/
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '1.5.4.RELEASE'
 
-	
+	/**config-client*/
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '1.4.4.RELEASE'
+
+
+
 
 }
 

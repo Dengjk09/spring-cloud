@@ -1,0 +1,9 @@
+spring:
+  application:
+    #应用名字  -在config-client中应用的名字会会作为加载远程git上的加载文件  首先会去加载应用名称对应的文件 ,如果没有就会默认加载application的文件属性内容
+    name: cloud-config-client
+  cloud:
+    config:
+      uri: http://localhost:9096
+      profile: dev  #读取文件的profile
+      label: master  #读取的分支,默认是master

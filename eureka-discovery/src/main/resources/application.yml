@@ -16,10 +16,9 @@ eureka:
     enable-self-preservation: false
     #检测到服务down掉后,清理无效节点的时间间隔
     eviction-interval-timer-in-ms: 4000
-
 spring:
   application:
-    #应用名字
+    #应用名字  在eureka中也可以用 eureka.instance.appname来指定虚拟应用名字
     name: eureka-discovery
 security:
   basic:
