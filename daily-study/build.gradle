@@ -1,5 +1,7 @@
 apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
+apply plugin: 'java'
+apply plugin: 'idea'
 /*
 dependencyManagement {
 	imports {
@@ -7,6 +9,12 @@ dependencyManagement {
 	}
 }
 */
+
+
+bootRun {
+	//开启页面热加载功能
+	addResources = true
+}
 
 
 repositories {
@@ -39,6 +47,10 @@ dependencies {
 	/**jpa*/
 	runtime('mysql:mysql-connector-java:5.1.21')
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.4.RELEASE'
+	compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.10'
+	/**热部署*/
+	//compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.1.RELEASE'
+	compile("org.springframework.boot:spring-boot-devtools")
 
 }
 

@@ -1,15 +1,15 @@
-
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>demo</title>
+    <title>thymeleaf模板引擎</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <table>
     <tr><td th:text="${name}"></td></tr>
-        <td th:text="${user.name}">aabbcc</td>
-        <td th:text="${user.age}">123dds</td>
+        <td style="color: red" th:text="${user.name}">aabbcc</td>
+        <td  th:text="${user.age}">123dds</td>
     </tr>
 </table>
 </body>
