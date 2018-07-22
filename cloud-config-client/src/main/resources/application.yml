@@ -1,0 +1,13 @@
+server:
+  port: 9097
+
+spring:
+  application:
+    #应用名字
+    name: cloud-config-client
+security:
+  basic:
+    enabled: true
+  user:
+   name: root
+   password: root
