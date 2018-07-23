@@ -2,8 +2,25 @@ spring:
   application:
     #应用名字  -在config-client中应用的名字会会作为加载远程git上的加载文件  首先会去加载应用名称对应的文件 ,如果没有就会默认加载application的文件属性内容
     name: cloud-config-client
+#  cloud:
+#    config:
+#      uri: http://localhost:9096 #这种硬编码写死的不好 ,把config-server注册到eruka,这里可以直接引用servier-id
+#      profile: dev  #读取文件的profile
+#      label: master  #读取的分支,默认是master
+#      name:  config-server-simple  #读取仓库名称
   cloud:
     config:
-      uri: http://localhost:9096
-      profile: dev  #读取文件的profile
-      label: master  #读取的分支,默认是master
+      discovery:
+        enabled: true
+        service-id: cloud-config-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:9090/eureka/
+  instance:
+    #开启虚拟主机ip地址->就不在显示计算机名字,或者localhost
+    prefer-ip-address: true
+    #指定显示规则
+    #instance-id: ${eureka.instance.appname}:${spring.application.instance_id:${server.port}}
+    appname: cloud-config-server  #可代替application.name

@@ -9,17 +9,46 @@ server:
 #{label}/{application}-{profile}.properties
 
 #简单模式
-#spring:
-#  cloud:
-#    config:
-#      server:
-#        git:
-#          uri: https://gitee.com/dengjiakang/config-server.git
-
-#通过占位符来指定
 spring:
   cloud:
     config:
       server:
         git:
-          uri: https://gitee.com/dengjiakang/{application}
+          uri: https://gitee.com/dengjiakang/config-server.git
+  application:
+    name: cloud-config-server
+
+#通过占位符来指定  这样就可以一个项目对应一个git仓库  可以通过http://127.0.0.1:9096/config-server-simple-default.yml 来访问
+#spring:
+#  cloud:
+#    config:
+#      server:
+#        git:
+#         uri: https://gitee.com/dengjiakang/{application}
+
+#匹配模式
+#spring:
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://gitee.com/dengjiakang/config-server   #公用的的 ,当寻找不到时候用公用的
+#          repos:  #其他的仓库
+#            simple: https://gitee.com/dengjiakang/config-server-simple  #名字随便取  如果仓库不用配置其他信息 直接在后面跟url
+#            special:
+#              pattern: config-server-special*/dev*
+#              uri: https://gitee.com/dengjiakang/config-server-special
+
+#向eureka注册服务,所有的客户端就不用不用硬编码写死地址了 ，就可以直接使用eruka的虚拟主机名字来访问了
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:9090/eureka/
+  instance:
+    #开启虚拟主机ip地址->就不在显示计算机名字,或者localhost
+    prefer-ip-address: true
+    #appname: cloud-config-server  #可代替application.name
+    #指定显示规则
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+

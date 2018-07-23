@@ -24,7 +24,8 @@ dependencies {
 	/**config-client*/
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '1.4.4.RELEASE'
 
-
+	/**eureka的客户端*/
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka', version: '1.4.5.RELEASE'
 
 
 }
