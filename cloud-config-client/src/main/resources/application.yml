@@ -1,2 +1,7 @@
 server:
   port: 9097
+
+#actuator信息
+management:
+  security:
+    enabled: false
