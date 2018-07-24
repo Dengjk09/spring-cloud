@@ -22,5 +22,5 @@ eureka:
     #开启虚拟主机ip地址->就不在显示计算机名字,或者localhost
     prefer-ip-address: true
     #指定显示规则
-    #instance-id: ${eureka.instance.appname}:${spring.application.instance_id:${server.port}}
-    appname: cloud-config-server  #可代替application.name
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    #appname: cloud-config-server  #可代替application.name
