@@ -28,6 +28,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  *
  *  rabbitmq信息  config-client连接上了mq之后  会自动建立一个topic类型的交换机:springCloudBus   并且绑定一个队列
  *
+ *	springcloud-bus如果配置在config-client端的话  就只会刷新当前的这个client,其他的client并不能得到刷新
+ *
+ *	可以把springcloud-bus配置在config-server端  通过bus/refresh就可以重新加载git仓库  获取最先的配置文件,  所有的client都可以得到更新
+ *
  **/
 @SpringBootApplication
 @EnableEurekaClient
