@@ -13,6 +13,12 @@ spring:
       discovery:
         enabled: true
         service-id: cloud-config-server
+  #rabbitmq配置
+  rabbitmq:
+    addresses: localhost
+    username: guest
+    password: guest
+    port: 5674
 
 eureka:
   client:
