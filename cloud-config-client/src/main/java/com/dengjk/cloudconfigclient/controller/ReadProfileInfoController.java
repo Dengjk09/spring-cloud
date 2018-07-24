@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @RefreshScope 该注解表明这里是一个可自动刷新 重新加载配置文件
  * 站点来访问  http://localhost:9097/refresh  重新加载git上面的配置文件
  *
- *  也可以通过springcloud-bus 来刷新  ,嵌入rabbitmq 做为消息推送,更新所有的config-server下面的所有client
+ *  也可以通过springcloud-bus 来刷新  ,嵌入rabbitmq 做为消息推送,更新所有的config-server下面的所有client   也可以指定刷新某一个节点/ bus / refresh？destination = customers：9000
  *
  *  导入bus-amqp的依赖
+ *  配置mq的连接信息
+ *  http://localhost:9097/bus/refresh
  *
  */
 @RestController
