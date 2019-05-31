@@ -35,7 +35,7 @@ public class SwaggerConfig {
                 .title("构建Restful api")
                 .description("")
                 .termsOfServiceUrl("www.baidu.com")
-                .contact(new Contact("Dengjk",null,"dengjiakang@banggood.com"))
+                .contact(new Contact("Dengjk",null,"277991520@qq.com"))
                 .version("1.0")
                 .build();
     }
