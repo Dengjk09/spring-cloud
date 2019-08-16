@@ -2,19 +2,11 @@ apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
 
 
-repositories {
-	maven { url "http://repo.spring.io/snapshot" }
-	maven { url "http://repo.spring.io/milestone" }
-	maven { url "http://repo.spring.io/plugins-release"}
-	maven { url "http://maven.aliyun.com/nexus/content/groups/public"}
-	mavenCentral()
-}
 
 dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter')
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.4.RELEASE'
-
+	compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
 	/**AOP*/
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.0.3.RELEASE'
 
@@ -33,4 +25,5 @@ dependencies {
 
 jar {
 	baseName = 'eureka-discovery'
+	version = "${version}"
 }

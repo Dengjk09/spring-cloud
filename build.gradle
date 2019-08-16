@@ -1,77 +1,83 @@
+apply from: 'dependencies.gradle'
+
+/**gradle初始化所执行的脚本-优先执行*/
 buildscript {
-	ext {
-		springBootVersion = '1.5.4.RELEASE'
-	}
-	repositories {
-		maven { url "http://repo.spring.io/snapshot" }
-		maven { url "http://repo.spring.io/milestone" }
-		maven { url "http://repo.spring.io/plugins-release"}
-		maven { url "http://maven.aliyun.com/nexus/content/groups/public"}
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
-		classpath('se.transmode.gradle:gradle-docker:1.2')
-		classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
-	}
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        maven { url "http://repo.spring.io/libs-milestone" }
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://mvnrepository.com/" }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE'
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+    }
 }
 
+/**本地maven仓库位置*/
+//def localMavenRepo = 'file://' + new File("D:\\Maven\\repo").absolutePath
 
-repositories {
-	mavenCentral()
-	maven { url "http://maven.aliyun.com/nexus/content/repositories/snapshots"}
-}
 
 /**设置所有的子项目插件依赖*/
 allprojects {
-	apply plugin: 'idea'
-	group = 'com.dengjk'
-	version = '0.1.0-SNAPSHOT'
+    group = 'com.dengjk'
+    version = '0.1.0-SNAPSHOT'
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'docker'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
 /**锁定子项目的版本*/
 subprojects {
-	ext {
-		mybatisSpringBootVersion='1.2.0'
-		mybatisVersion = '3.2.8'
-		mysqlVersion = '5.1.38'
-		okhttpVersion = '3.4.1'
-		druidVersion = '1.0.18'
-		commonsLang3Version = '3.4'
-		snappyVersion = '1.1.2.1'
-		log4jAPIVersion = '2.5'
-		nekoHtmlVersion = '1.9.22'
-		httpclientVersion = '4.5.2'
-		feignHttpclientVersion ='8.17.0'
-		swagger2Version = '2.2.2'
-		springIntegrationKafkaVersion = '2.0.1.RELEASE'
-		springKafkaCoreVersion ='4.3.6.RELEASE'
-		springKafkaVersion = '1.1.0.RELEASE'
-		fastjsonVersion = '1.2.16'
-		springDataHadoopVersion='2.4.0.RELEASE' //2.1.2.RELEASE
-		hbaseClientVersion ='1.2.4'
-		hadoopVersion = '2.7.3'
-	}
-	apply plugin: 'java'
-	apply plugin: 'idea'
 
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/snapshots" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/plugins-release" }
+        mavenCentral()
+        mavenLocal()
+    }
+    /**
+     * 所有子模块都可以不指定版本,自适应版本
+     */
+    dependencyManagement {
+        imports {
+            mavenBom 'io.spring.platform:platform-bom:Cairo-SR7'
+        }
+    }
 
-	[compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+    /**
+     * 排除依赖
+     */
 
-	repositories {
-		mavenLocal()
-		maven { url "http://repo.spring.io/snapshot" }
-		maven { url "http://repo.spring.io/milestone" }
-		maven { url "http://repo.spring.io/plugins-release"}
-		maven { url "http://maven.aliyun.com/nexus/content/repositories/snapshots"}
-		mavenCentral()
-	}
+    /**编译编码*/
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
-	sourceSets {
-		main {
-			java.srcDir('src/main/java')
-			resources.srcDir('src/main/resources')
-		}
-	}
+    /**
+     * 父类通用依赖
+     */
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+        compile "com.alibaba:fastjson:${fastJsonVersion}"
+        compile "org.apache.commons:commons-lang3:${commonsLang3Version}"
+        compile "com.google.guava:guava:${guavaVersion}"
+        compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+        compile "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}"
+    }
+
+    sourceSets {
+        main {
+            java.srcDir('src/main/java')
+            resources.srcDir('src/main/resources')
+        }
+    }
 }
