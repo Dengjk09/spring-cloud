@@ -1,12 +1,25 @@
+
+task buildDocker(type: Docker, dependsOn: build) {
+	applicationName = jar.baseName
+	dockerfile = file('Dockerfile')
+	doFirst {
+		copy {
+			from jar
+			into "${stageDir}/target"
+		}
+	}
+}
+
+
 apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
-
 
 
 dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter')
-	compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.4.RELEASE'
+
 	/**AOP*/
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.0.3.RELEASE'
 
@@ -18,7 +31,6 @@ dependencies {
 
 	/**加入spring security用于eureka页面登入认证*/
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.0.3.RELEASE'
-
 
 }
 

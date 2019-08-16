@@ -1,7 +1,7 @@
 configure(allprojects) { project ->
     ext.mysqlConnectorVersion = '8.0.13'
     ext.sqlserverConnectorVersion = 'sqljdbc4:4.0'
-    ext.springBootVersion = '1.5.8.RELEASE'
+    ext.springBootVersion = '1.5.4.RELEASE'
     ext.lombokVersion = '1.18.8'
     ext.gsonVersion = '2.8.1'
     ext.commonsLang3Version = '3.7'

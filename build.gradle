@@ -1,77 +1,55 @@
-apply from: 'dependencies.gradle'
 
-/**gradle初始化所执行的脚本-优先执行*/
+apply from: 'dependencies.gradle'
 buildscript {
     repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
-        maven { url "http://repo.spring.io/libs-milestone" }
-        maven { url "http://repo.spring.io/release" }
-        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public"}
         maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://mvnrepository.com/" }
-        mavenCentral()
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/plugins-release"}
     }
-
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
-        classpath 'io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
         classpath('se.transmode.gradle:gradle-docker:1.2')
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
     }
 }
-
-/**本地maven仓库位置*/
-//def localMavenRepo = 'file://' + new File("D:\\Maven\\repo").absolutePath
 
 
 /**设置所有的子项目插件依赖*/
 allprojects {
+    apply plugin: 'docker'
+    apply plugin: 'idea'
     group = 'com.dengjk'
     version = '0.1.0-SNAPSHOT'
-    apply plugin: "io.spring.dependency-management"
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'docker'
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
 }
 
 /**锁定子项目的版本*/
 subprojects {
 
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
     repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/repositories/snapshots" }
+        mavenLocal()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
-        maven { url "http://repo.spring.io/plugins-release" }
+        maven { url "http://repo.spring.io/plugins-release"}
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/snapshots"}
         mavenCentral()
-        mavenLocal()
-    }
-    /**
-     * 所有子模块都可以不指定版本,自适应版本
-     */
-    dependencyManagement {
-        imports {
-            mavenBom 'io.spring.platform:platform-bom:Cairo-SR7'
-        }
     }
 
-    /**
-     * 排除依赖
-     */
-
-    /**编译编码*/
-    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
-
-    /**
-     * 父类通用依赖
-     */
     dependencies {
-        compile "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+        compile "org.projectlombok:lombok:${lombokVersion}"
+        compile "com.google.code.gson:gson:${gsonVersion}"
         compile "com.alibaba:fastjson:${fastJsonVersion}"
         compile "org.apache.commons:commons-lang3:${commonsLang3Version}"
         compile "com.google.guava:guava:${guavaVersion}"
-        compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
-        compile "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}"
+        compile "commons-beanutils:commons-beanutils:${beanutilsVersion}"
     }
 
     sourceSets {
