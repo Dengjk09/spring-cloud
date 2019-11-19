@@ -1,0 +1,36 @@
+task buildDocker(type: Docker, dependsOn: build) {
+    applicationName = jar.baseName
+    dockerfile = file('Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into "${stageDir}/target"
+        }
+    }
+}
+
+
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
+
+
+dependencies {
+
+    compile('org.springframework.boot:spring-boot-starter')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.4.RELEASE'
+
+    /**AOP*/
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.0.3.RELEASE'
+
+    /**actuator*/
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '1.5.4.RELEASE'
+
+    compile 'de.codecentric:spring-boot-admin-starter-server:1.5.7'
+    compile 'de.codecentric:spring-boot-admin-server-ui:1.5.7'
+}
+
+
+jar {
+    baseName = 'spring-admin'
+    version = "${version}"
+}

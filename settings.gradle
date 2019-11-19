@@ -8,6 +8,7 @@ include 'daily-study'
 include 'cloud-config-servier'
 include 'cloud-config-client'
 include 'apollo'
+include 'spring-admin'
 
 
 
