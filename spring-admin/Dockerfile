@@ -9,7 +9,7 @@ RUN mkdir -p /opt/spring-admin
 RUN mkdir /apm-agent
 
 # Add the jar and run
-ADD target/spring-admin-1.0-SNAPSHOT.jar /opt/spring-admin/app.jar
+ADD target/spring-admin-0.1.0-SNAPSHOT.jar /opt/spring-admin/app.jar
 
 #RUN mv /opt/tms/app/BOOT-INF/classes/SIMYOU.TTF  /opt/tms/
 #RUN mv /opt/tms/app/BOOT-INF/classes/11.png  /opt/tms/
