@@ -1,6 +1,8 @@
 package com.dengjk.springadmin.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import java.util.Map;
  **/
 @RequestMapping("/admin")
 @RestController
+@Slf4j
 public class AdminController {
 
 
@@ -27,12 +30,15 @@ public class AdminController {
         String ip = addr.getHostAddress().toString();
         /**获取本机计算机名称*/
         String hostName = addr.getHostName().toString();
+        resultMap.put("version", "v2");
         resultMap.put("localIp", ip);
         resultMap.put("hostName", hostName);
         resultMap.put("requestIp", request.getRemoteAddr());
         resultMap.put("serverPort", request.getServerPort());
         resultMap.put("requestPath", request.getRequestURI());
         resultMap.put("requestUrl", request.getRequestURL().toString());
+        log.info("请求信息:{}", JSON.toJSONString(resultMap));
+        log.error("请求信息:{}", JSON.toJSONString(resultMap));
         return resultMap;
     }
 }
