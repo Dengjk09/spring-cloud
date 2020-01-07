@@ -30,7 +30,7 @@ public class AdminController {
         String ip = addr.getHostAddress().toString();
         /**获取本机计算机名称*/
         String hostName = addr.getHostName().toString();
-        resultMap.put("version", "v3");
+        resultMap.put("version", "v2");
         resultMap.put("localIp", ip);
         resultMap.put("hostName", hostName);
         resultMap.put("requestIp", request.getRemoteAddr());
