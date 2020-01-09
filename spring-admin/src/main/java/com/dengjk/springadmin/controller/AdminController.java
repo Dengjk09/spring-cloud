@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
+import java.util.Enumeration;
 import java.util.Map;
 
 /**
@@ -30,15 +31,29 @@ public class AdminController {
         String ip = addr.getHostAddress().toString();
         /**获取本机计算机名称*/
         String hostName = addr.getHostName().toString();
-        resultMap.put("version", "v2");
+        String serverName = request.getServerName();
+        String remoteHost = request.getRemoteHost();
+        String localAddr = request.getLocalAddr();
+        int remotePort = request.getRemotePort();
+        resultMap.put("version", "v4");
         resultMap.put("localIp", ip);
         resultMap.put("hostName", hostName);
         resultMap.put("requestIp", request.getRemoteAddr());
         resultMap.put("serverPort", request.getServerPort());
         resultMap.put("requestPath", request.getRequestURI());
         resultMap.put("requestUrl", request.getRequestURL().toString());
+        resultMap.put("serverName", serverName);
+        resultMap.put("remoteHost", remoteHost);
+        resultMap.put("localAddr", localAddr);
+        resultMap.put("remotePort", remotePort);
+        /**代理信息*/
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = (String) headerNames.nextElement();
+            String value = request.getHeader(key);
+            resultMap.put(key, value);
+        }
         log.info("请求信息:{}", JSON.toJSONString(resultMap));
-        log.error("请求信息:{}", JSON.toJSONString(resultMap));
         return resultMap;
     }
 }
