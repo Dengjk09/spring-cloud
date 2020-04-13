@@ -127,9 +127,15 @@ public class AdminController {
             ip = request.getHeader("HTTP_CLIENT_IP");
         }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            /**针对k8s*/
+            log.info("x-Original-Forwarded-For:{}", request.getHeader("x-Original-Forwarded-For"));
+            ip = request.getHeader("x-Original-Forwarded-For");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_X_FORWARDED_FOR");
         }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            log.info("直接获取了远程地址:{}", request.getRemoteAddr());
             ip = request.getRemoteAddr();
         }
         /**多个ip,取第一个*/
