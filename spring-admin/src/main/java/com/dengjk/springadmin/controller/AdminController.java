@@ -1,5 +1,6 @@
 package com.dengjk.springadmin.controller;
 
+import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
@@ -7,6 +8,7 @@ import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.UserAgent;
 import lombok.extern.slf4j.Slf4j;
 import org.lionsoul.ip2region.DataBlock;
+import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
 import org.lionsoul.ip2region.Util;
 import org.springframework.core.io.ClassPathResource;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
@@ -92,13 +94,16 @@ public class AdminController {
         if (!Util.isIpAddress(ip)) {
             return "";
         }
-        /**读取文件*/
-        File file = new ClassPathResource("ip2region/ip2region.db").getFile();
-        if (!file.exists()) {
-            return "";
+        String filePath = "/opt/spring-admin/ip2region.db";
+        boolean exist = FileUtil.exist(filePath);
+        if (!exist) {
+            /**如果文件不存在 读取文件*/
+            InputStream in = new ClassPathResource("ip2region/ip2region.db").getInputStream();
+            FileUtil.writeFromStream(in, filePath);
         }
-        DbSearcher searcher = new DbSearcher(new org.lionsoul.ip2region.DbConfig(), file.getPath());
+        DbSearcher searcher = new DbSearcher(new DbConfig(), filePath);
         DataBlock dataBlock = searcher.btreeSearch(ip);
+        searcher.close();
         return dataBlock.getRegion().replaceAll("\\|0|0\\|", "");
     }
 
