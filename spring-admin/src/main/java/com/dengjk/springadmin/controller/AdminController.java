@@ -59,7 +59,7 @@ public class AdminController {
         resultMap.put("remotePort", remotePort);
         resultMap.put("browserName", getBrowser(request));
         resultMap.put("realIp", this.getRealIp(request));
-        resultMap.put("ipUserInfo", this.analyzeIp(this.getRealIp(request)));
+        resultMap.put("ipUserInfo", this.analyzeIp(this.getRealIp(request), request));
         /**代理信息*/
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
@@ -80,11 +80,15 @@ public class AdminController {
      * @throws Exception
      */
     @GetMapping("/analyzeIp")
-    public JSONObject analyzeIp(String ip) throws Exception {
+    public JSONObject analyzeIp(String ip, HttpServletRequest request) throws Exception {
+        String header1 = request.getHeader("x-Original-Forwarded-For");
+        String header = request.getHeader("x-forwarded-for");
         String address = this.getAddress(ip);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ipInfo", address);
         jsonObject.put("originIp", ip);
+        jsonObject.put("x-forwarded-for", header);
+        jsonObject.put("x-Original-Forwarded-For", header1);
         return jsonObject;
     }
 
