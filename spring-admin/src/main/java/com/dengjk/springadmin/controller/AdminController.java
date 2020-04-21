@@ -1,6 +1,7 @@
 package com.dengjk.springadmin.controller;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
@@ -14,13 +15,14 @@ import org.lionsoul.ip2region.Util;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,13 +62,11 @@ public class AdminController {
         resultMap.put("browserName", getBrowser(request));
         resultMap.put("realIp", this.getRealIp(request));
         resultMap.put("ipUserInfo", this.analyzeIp(this.getRealIp(request), request));
-        /**代理信息*/
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String key = (String) headerNames.nextElement();
-            String value = request.getHeader(key);
-            resultMap.put(key, value);
-        }
+        /**使用hutool工具获取ip，该工具解析了一般的代理ip*/
+        String clientIP = ServletUtil.getClientIP(request);
+        /**获取所有的头信息*/
+        Map<String, String> headerMap = ServletUtil.getHeaderMap(request);
+        resultMap.putAll(headerMap);
         log.info("请求信息:{}", JSON.toJSONString(resultMap));
         return resultMap;
     }
@@ -90,6 +90,18 @@ public class AdminController {
         jsonObject.put("x-forwarded-for", header);
         jsonObject.put("x-Original-Forwarded-For", header1);
         return jsonObject;
+    }
+
+
+    /**
+     * 测试 ingress-url过长
+     *
+     * @param orderIds
+     * @return
+     */
+    @GetMapping("/testGetUrl")
+    public List<String> testGetUrl(@RequestParam(required = true) List<String> orderIds) {
+        return orderIds;
     }
 
 

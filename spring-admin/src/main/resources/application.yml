@@ -5,3 +5,4 @@ spring:
     active: prod
 server:
   port: 9098
+  max-http-header-size: 1024000
