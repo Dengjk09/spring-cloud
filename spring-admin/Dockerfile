@@ -1,4 +1,4 @@
-FROM java:8-jre
+FROM java:8-jdk
 
 # Set the timezone.
         RUN echo "Asia/Chongqing" > /etc/timezone
