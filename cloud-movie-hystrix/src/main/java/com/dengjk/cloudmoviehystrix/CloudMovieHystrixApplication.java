@@ -17,4 +17,5 @@ public class CloudMovieHystrixApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CloudMovieHystrixApplication.class, args);
 	}
+
 }
