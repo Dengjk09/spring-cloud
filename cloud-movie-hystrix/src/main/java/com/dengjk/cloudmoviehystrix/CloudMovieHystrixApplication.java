@@ -15,7 +15,7 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 public class CloudMovieHystrixApplication {
 
 	/**
-	 *1234
+	 *12345
 	 * @param args
 	 */
     public static void main(String[] args) {
