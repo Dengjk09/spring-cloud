@@ -13,6 +13,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableAdminServer
 public class SpringAdminApplication {
 
+    /**
+     * 12
+     * @param args
+     */
     public static void main(String[] args) {
         SpringApplication.run(SpringAdminApplication.class, args);
     }
