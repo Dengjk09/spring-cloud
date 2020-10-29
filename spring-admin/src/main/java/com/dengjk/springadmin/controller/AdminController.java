@@ -12,6 +12,7 @@ import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
 import org.lionsoul.ip2region.Util;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,9 @@ import java.util.Map;
 @Slf4j
 public class AdminController {
 
+
+    @Value("${buildId:djk123}")
+    private String buildId;
 
     @GetMapping("/hostInfo")
     public Map<String, Object> hostInfo(HttpServletRequest request) throws Exception {
@@ -61,6 +65,7 @@ public class AdminController {
         resultMap.put("remotePort", remotePort);
         resultMap.put("browserName", getBrowser(request));
         resultMap.put("realIp", this.getRealIp(request));
+        resultMap.put("buildId", buildId);
         resultMap.put("ipUserInfo", this.analyzeIp(this.getRealIp(request), request));
         /**使用hutool工具获取ip，该工具解析了一般的代理ip*/
         String clientIP = ServletUtil.getClientIP(request);
