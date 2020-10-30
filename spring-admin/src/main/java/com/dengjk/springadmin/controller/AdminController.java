@@ -78,6 +78,17 @@ public class AdminController {
 
 
     /**
+     * @return
+     */
+    @GetMapping("/appRedirect")
+    public Map<String, String[]> appRedirect(HttpServletRequest request) {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        log.error("重定向成功:{}", JSON.toJSONString(parameterMap));
+        return parameterMap;
+    }
+
+
+    /**
      * 解析ip
      *
      * @param ip
